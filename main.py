@@ -356,7 +356,7 @@ class Application(Frame):
             self.wb.save(self.reprotName)
             self.clear()
         except PermissionError as e :
-            messagebox.showerror("Error", """The excel file in which you are trying to save is currently open. 
+            messagebox.showerror("Error", """The excel file in which you are trying to save is currently open. Please close the excel file and click on submit again. 
             If problem persists, Please report the issue with screenshot to navadiatarun@gmail.com: """ + str(e))
 
     def clear(self):
