@@ -4,7 +4,7 @@ from tkinter import filedialog
 from tkinter import messagebox
 import datetime
 from openpyxl import load_workbook
-from n2w import convert
+from num2words import num2words
 #import Tkinter.messagebox
 
 class Application(Frame):
@@ -209,7 +209,7 @@ class Application(Frame):
         self.state_field = Entry(root)
         self.pincode_field = Entry(root)
         self.Amount_field = Entry(root)
-        self.AmountWr_field = Entry(root)
+        self.AmountWr_field = Label(root , text="")
         self.contact_no_field = Entry(root)
         self.email_id_field = Entry(root)
         #self.payment_mode_field = Entry(root)
@@ -283,7 +283,7 @@ class Application(Frame):
         self.Amount_field.focus_set()  
         
     def focus_set_contact_no_field  (self,event):
-        self.AmountWr_field.set(convert(Amount_field.get()))
+        self.AmountWr_field['text'] = num2words(int(self.Amount_field.get())) + " rupees only"
         self.contact_no_field.focus_set()
     
     def focus_set_email_id_field  (self,event):
@@ -342,7 +342,7 @@ class Application(Frame):
         self.ws.cell(row=self.current_row + 1, column=7).value = self.district_field.get()
         self.ws.cell(row=self.current_row + 1, column=8).value = self.state_field.get()
         self.ws.cell(row=self.current_row + 1, column=9).value = self.pincode_field.get()
-        self.ws.cell(row=self.current_row + 1, column=10).value = self.AmountWr_field.get()
+        self.ws.cell(row=self.current_row + 1, column=10).value = num2words(int(self.Amount_field.get())) + " rupees only"
         self.ws.cell(row=self.current_row + 1, column=11).value = self.Amount_field.get()
         self.ws.cell(row=self.current_row + 1, column=12).value = self.payment_mode_field.get()
         self.ws.cell(row=self.current_row + 1, column=13).value = self.reference_no_field.get()
@@ -369,7 +369,7 @@ class Application(Frame):
         self.district_field.delete(0, END)
         self.state_field.delete(0, END)
         self.pincode_field.delete(0, END)
-        self.AmountWr_field.delete(0, END)
+        self.AmountWr_field['text'] = ""
         self.Amount_field.delete(0, END)
         self.payment_mode_field.set('NEFT')
         self.reference_no_field.delete(0, END)
